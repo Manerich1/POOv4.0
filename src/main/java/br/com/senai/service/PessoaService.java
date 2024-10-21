@@ -1,6 +1,7 @@
 package br.com.senai.service;
 
 import br.com.senai.entity.Pessoa;
+import br.com.senai.exception.EntidadeException;
 import br.com.senai.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,12 @@ public class PessoaService {
     }
 
     public Pessoa buscarPessoaPorId(Long idPessoa) {
-
+//        Pessoa pessoa = pessoaRepository.findById(idPessoa)
+//                .orElseThrow(() ->
+//                        new RuntimeException("Cadastro não encontrado. ID: " + idPessoa + " i.nválido"));
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() ->
-                        new RuntimeException("Cadastro não encontrado. ID inválido: " + idPessoa));
+                        new EntidadeException("Cadastro não encontrado. ID: " + idPessoa + " inválido"));
         return pessoa;
     }
 
