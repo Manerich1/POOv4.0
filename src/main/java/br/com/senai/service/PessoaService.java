@@ -6,6 +6,7 @@ import br.com.senai.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 // Aula top começamos arrumando o PessoaService
 
@@ -34,7 +35,17 @@ public class PessoaService {
     }
 
     public List<Pessoa> buscarPessoaPorNome(String nomePessoa) {
-        return pessoaRepository.buscarPessoaPorNome(nomePessoa);
+        List<Pessoa> pessoas = new ArrayList<>();
+        try {
+            pessoas = pessoaRepository.buscarPessoaPorNome(nomePessoa);
+
+            System.out.println(pessoas.get(1).getNome());
+
+        } catch (EntidadeException entidade) {
+            System.out.println(entidade.getMessage());
+        }
+
+        return pessoas;
     }
 
     public void excluirPessoa(Long idPessoa) {
