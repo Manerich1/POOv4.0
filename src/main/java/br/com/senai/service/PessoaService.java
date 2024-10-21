@@ -23,7 +23,11 @@ public class PessoaService {
     }
 
     public Pessoa buscarPessoaPorId(Long idPessoa) {
-        return pessoaRepository.findById(idPessoa).orElse(null);
+
+        Pessoa pessoa = pessoaRepository.findById(idPessoa)
+                .orElseThrow(() ->
+                        new RuntimeException("Cadastro não encontrado. ID inválido: " + idPessoa));
+        return pessoa;
     }
 
     public List<Pessoa> buscarPessoaPorNome(String nomePessoa) {
